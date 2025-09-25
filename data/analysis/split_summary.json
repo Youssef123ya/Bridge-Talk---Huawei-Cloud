@@ -1,0 +1,201 @@
+{
+  "total_samples": 54049,
+  "num_classes": 32,
+  "train_samples": 37834,
+  "val_samples": 10810,
+  "test_samples": 5405,
+  "class_stats": {
+    "ain": {
+      "total": 2114,
+      "train": 1480,
+      "val": 422,
+      "test": 212
+    },
+    "al": {
+      "total": 1343,
+      "train": 940,
+      "val": 269,
+      "test": 134
+    },
+    "aleff": {
+      "total": 1672,
+      "train": 1170,
+      "val": 335,
+      "test": 167
+    },
+    "bb": {
+      "total": 1791,
+      "train": 1254,
+      "val": 358,
+      "test": 179
+    },
+    "dal": {
+      "total": 1634,
+      "train": 1144,
+      "val": 327,
+      "test": 163
+    },
+    "dha": {
+      "total": 1723,
+      "train": 1206,
+      "val": 345,
+      "test": 172
+    },
+    "dhad": {
+      "total": 1670,
+      "train": 1169,
+      "val": 334,
+      "test": 167
+    },
+    "fa": {
+      "total": 1955,
+      "train": 1368,
+      "val": 391,
+      "test": 196
+    },
+    "gaaf": {
+      "total": 1705,
+      "train": 1194,
+      "val": 341,
+      "test": 170
+    },
+    "ghain": {
+      "total": 1977,
+      "train": 1384,
+      "val": 395,
+      "test": 198
+    },
+    "ha": {
+      "total": 1592,
+      "train": 1114,
+      "val": 319,
+      "test": 159
+    },
+    "haa": {
+      "total": 1526,
+      "train": 1068,
+      "val": 305,
+      "test": 153
+    },
+    "jeem": {
+      "total": 1552,
+      "train": 1086,
+      "val": 311,
+      "test": 155
+    },
+    "kaaf": {
+      "total": 1774,
+      "train": 1242,
+      "val": 355,
+      "test": 177
+    },
+    "khaa": {
+      "total": 1607,
+      "train": 1125,
+      "val": 321,
+      "test": 161
+    },
+    "la": {
+      "total": 1746,
+      "train": 1222,
+      "val": 349,
+      "test": 175
+    },
+    "laam": {
+      "total": 1832,
+      "train": 1282,
+      "val": 367,
+      "test": 183
+    },
+    "meem": {
+      "total": 1765,
+      "train": 1236,
+      "val": 353,
+      "test": 176
+    },
+    "nun": {
+      "total": 1819,
+      "train": 1273,
+      "val": 364,
+      "test": 182
+    },
+    "ra": {
+      "total": 1659,
+      "train": 1161,
+      "val": 332,
+      "test": 166
+    },
+    "saad": {
+      "total": 1895,
+      "train": 1327,
+      "val": 379,
+      "test": 189
+    },
+    "seen": {
+      "total": 1638,
+      "train": 1147,
+      "val": 327,
+      "test": 164
+    },
+    "sheen": {
+      "total": 1507,
+      "train": 1055,
+      "val": 301,
+      "test": 151
+    },
+    "ta": {
+      "total": 1816,
+      "train": 1271,
+      "val": 363,
+      "test": 182
+    },
+    "taa": {
+      "total": 1838,
+      "train": 1287,
+      "val": 367,
+      "test": 184
+    },
+    "thaa": {
+      "total": 1766,
+      "train": 1236,
+      "val": 353,
+      "test": 177
+    },
+    "thal": {
+      "total": 1582,
+      "train": 1107,
+      "val": 317,
+      "test": 158
+    },
+    "toot": {
+      "total": 1791,
+      "train": 1254,
+      "val": 358,
+      "test": 179
+    },
+    "waw": {
+      "total": 1371,
+      "train": 960,
+      "val": 274,
+      "test": 137
+    },
+    "ya": {
+      "total": 1722,
+      "train": 1205,
+      "val": 344,
+      "test": 173
+    },
+    "yaa": {
+      "total": 1293,
+      "train": 905,
+      "val": 259,
+      "test": 129
+    },
+    "zay": {
+      "total": 1374,
+      "train": 962,
+      "val": 275,
+      "test": 137
+    }
+  }
+}

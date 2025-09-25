@@ -1,0 +1,56 @@
+# Arabic Sign Language Recognition Project Configuration
+# Phase 1: Environment Setup and Data Validation
+
+# Data Configuration
+data:
+  # File paths
+  labels_file: "data/ArSL_Data_Labels.csv"
+  raw_data_path: "data/raw/"
+  processed_data_path: "data/processed/"
+  analysis_path: "data/analysis/"
+  
+  # Image processing
+  image_size: [64, 64]  # Original dataset image size
+  channels: 1  # Grayscale images
+  
+  # Data loading
+  batch_size: 32
+  num_workers: 0  # Use 0 for Windows compatibility
+  random_seed: 42
+  
+  # Data splits
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+
+# Model Configuration (for future phases)
+model:
+  name: "SimpleCNN"
+  num_classes: 32  # Arabic alphabet letters
+  dropout: 0.5
+  
+# Training Configuration (for future phases)
+training:
+  epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  patience: 10  # Early stopping patience
+  
+# Hardware Configuration
+hardware:
+  device: "auto"  # auto, cpu, or cuda
+  mixed_precision: false
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  log_dir: "logs/"
+  save_checkpoints: true
+  checkpoint_dir: "models/checkpoints/"
+  
+# Phase 1 Status
+phase1:
+  environment_setup: true
+  data_validation: true
+  visualization_created: true
+  ready_for_phase2: true

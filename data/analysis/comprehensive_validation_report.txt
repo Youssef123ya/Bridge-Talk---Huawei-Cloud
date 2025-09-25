@@ -1,0 +1,81 @@
+================================================================================
+COMPREHENSIVE DATASET VALIDATION REPORT
+================================================================================
+Generated: 2025-09-24 23:33:16
+Dataset: data/ArSL_Data_Labels.csv
+Data Directory: data\raw
+
+FILE INTEGRITY ANALYSIS
+----------------------------------------
+Total files checked: 1,000
+Valid files: 1,000 (100.0%)
+Missing files: 0
+Corrupted files: 0
+
+CLASS DISTRIBUTION ANALYSIS
+----------------------------------------
+Number of classes: 32
+Total samples: 54,049
+Samples per class: 1293-2114
+Mean samples per class: 1689.0
+Balance ratio: 0.612
+Balance score: 0.906
+
+Class breakdown:
+  ain: 2,114 samples (3.9%)
+  al: 1,343 samples (2.5%)
+  aleff: 1,672 samples (3.1%)
+  bb: 1,791 samples (3.3%)
+  dal: 1,634 samples (3.0%)
+  dha: 1,723 samples (3.2%)
+  dhad: 1,670 samples (3.1%)
+  fa: 1,955 samples (3.6%)
+  gaaf: 1,705 samples (3.2%)
+  ghain: 1,977 samples (3.7%)
+  ha: 1,592 samples (2.9%)
+  haa: 1,526 samples (2.8%)
+  jeem: 1,552 samples (2.9%)
+  kaaf: 1,774 samples (3.3%)
+  khaa: 1,607 samples (3.0%)
+  la: 1,746 samples (3.2%)
+  laam: 1,832 samples (3.4%)
+  meem: 1,765 samples (3.3%)
+  nun: 1,819 samples (3.4%)
+  ra: 1,659 samples (3.1%)
+  saad: 1,895 samples (3.5%)
+  seen: 1,638 samples (3.0%)
+  sheen: 1,507 samples (2.8%)
+  ta: 1,816 samples (3.4%)
+  taa: 1,838 samples (3.4%)
+  thaa: 1,766 samples (3.3%)
+  thal: 1,582 samples (2.9%)
+  toot: 1,791 samples (3.3%)
+  waw: 1,371 samples (2.5%)
+  ya: 1,722 samples (3.2%)
+  yaa: 1,293 samples (2.4%)
+  zay: 1,374 samples (2.5%)
+
+IMAGE PROPERTIES ANALYSIS
+----------------------------------------
+Images analyzed: 1,000
+
+Dimensions:
+  Width: 64-256 (avg: 66.3)
+  Height: 64-256 (avg: 66.3)
+  Aspect ratio: 1.00-1.00 (avg: 1.00)
+
+Color modes:
+  L: 1000 images
+
+File sizes:
+  Range: 0.6-6.5 KB
+  Average: 1.1 KB
+
+Quality metrics:
+  Brightness: 38.2-208.4 (avg: 163.9)
+  Contrast: 16.8-84.7 (avg: 46.6)
+  Sharpness: 93.5-4048.3 (avg: 884.0)
+
+RECOMMENDATIONS
+----------------------------------------
+• High dimension variability - consider resizing to standard dimensions

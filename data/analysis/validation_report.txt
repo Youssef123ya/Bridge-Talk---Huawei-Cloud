@@ -1,0 +1,42 @@
+Arabic Sign Language Dataset Validation Report
+==================================================
+
+Dataset Summary:
+- CSV rows: 54049
+- Image folders: 32
+- Total images: 108,098
+- Average images per class: 3,378
+
+Class Distribution:
+- ain: 4,228 images
+- ghain: 3,954 images
+- fa: 3,910 images
+- saad: 3,790 images
+- taa: 3,676 images
+- laam: 3,664 images
+- nun: 3,638 images
+- ta: 3,632 images
+- bb: 3,582 images
+- toot: 3,582 images
+- kaaf: 3,548 images
+- thaa: 3,532 images
+- meem: 3,530 images
+- la: 3,492 images
+- dha: 3,446 images
+- ya: 3,444 images
+- gaaf: 3,410 images
+- aleff: 3,344 images
+- dhad: 3,340 images
+- ra: 3,318 images
+- seen: 3,276 images
+- dal: 3,268 images
+- khaa: 3,214 images
+- ha: 3,184 images
+- thal: 3,164 images
+- jeem: 3,104 images
+- haa: 3,052 images
+- sheen: 3,014 images
+- zay: 2,748 images
+- waw: 2,742 images
+- al: 2,686 images
+- yaa: 2,586 images
