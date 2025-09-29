@@ -29,6 +29,11 @@ A deep learning project for recognizing Arabic Sign Language (ArSL) gestures usi
 
 ## 🎯 Project Overview
 
+# 2. Install cloud dependencies
+pip install -r requirements.txt
+
+# 3. Run complete setup
+python scripts\setup_huawei_cloud.py --upload-data --start-training
 This project implements a CNN-based approach to classify Arabic sign language gestures representing the 32 letters of the Arabic alphabet. The dataset contains over 108,000 images across 32 classes.
 
 ## 📊 Dataset Statistics
