@@ -1,6 +1,11 @@
 # 🚀 **Complete Huawei Cloud Deployment Checklist**
 ## Arabic Sign Language Recognition Project
 
+**🔗 GitHub Repository**: https://github.com/Youssef123ya/Bridge-Talk  
+**👤 Developer**: Youssef123ya  
+**🌍 Region**: AF-Cairo (af-north-1)  
+**🎯 Complete Enterprise Cloud Integration**
+
 ---
 
 ## 📊 **Project Overview**

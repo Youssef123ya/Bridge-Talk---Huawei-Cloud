@@ -1,6 +1,31 @@
-# Arabic Sign Language Recognition Project
+# 🤖 Arabic Sign Language Recognition Project
 
-A deep learning project for recognizing Arabic Sign Language (ArSL) gestures using computer vision techniques.
+**🔗 GitHub Repository**: https://github.com/Youssef123ya/Bridge-Talk  
+**👤 Developer**: Youssef123ya  
+**🌍 Cloud Integration**: Huawei Cloud (AF-Cairo)  
+**🎯 Goal**: Real-time Arabic Sign Language Recognition with Enterprise Cloud Deployment
+
+## 🚀 **Complete Cloud Integration Available!**
+
+This project now includes **full Huawei Cloud integration** for enterprise-scale deployment:
+
+- ☁️ **Object Storage Service (OBS)** - Dataset and model storage
+- 🤖 **ModelArts** - GPU training with auto-scaling  
+- 🌐 **API Gateway** - Real-time inference deployment
+- 📊 **Cloud Eye** - Monitoring and alerting
+- ⚡ **ECS** - Scalable compute resources
+
+### 📋 **Quick Start with Cloud**
+```bash
+# Clone repository
+git clone https://github.com/Youssef123ya/Bridge-Talk.git
+cd Bridge-Talk
+
+# Follow cloud deployment guides
+see guides/00_master_checklist.md
+```
+
+A deep learning project for recognizing Arabic Sign Language (ArSL) gestures using computer vision techniques with complete cloud infrastructure.
 
 ## 🎯 Project Overview
 

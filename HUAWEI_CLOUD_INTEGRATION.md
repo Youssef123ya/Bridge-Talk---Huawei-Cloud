@@ -1,6 +1,11 @@
 # 🌟 Huawei Cloud Integration Guide
 ## Arabic Sign Language Recognition Project
 
+**📂 GitHub Repository**: https://github.com/Youssef123ya/Bridge-Talk  
+**👤 Developer**: Youssef123ya  
+**🌍 Region**: AF-Cairo (af-north-1)  
+**🎯 Project**: Complete Arabic Sign Language Recognition with Cloud Integration
+
 This guide provides comprehensive instructions for deploying your Arabic Sign Language Recognition project to Huawei Cloud services.
 
 ## 🚀 Overview
@@ -14,6 +19,12 @@ Your ARSL project is now integrated with the following Huawei Cloud services:
 - **⚡ Elastic Cloud Server (ECS)** - Scalable compute resources
 
 ## 📋 Prerequisites
+
+### 0. Clone Repository
+```bash
+git clone https://github.com/Youssef123ya/Bridge-Talk.git
+cd Bridge-Talk
+```
 
 ### 1. Huawei Cloud Account Setup
 1. Create a Huawei Cloud account at [https://www.huaweicloud.com](https://www.huaweicloud.com)
