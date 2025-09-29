@@ -28,6 +28,12 @@ ENV/
 .env
 .venv
 
+# Credentials and sensitive files
+credentials.csv
+*.key
+*.pem
+setup_huawei_env.ps1
+
 # PyTorch models and checkpoints
 *.pth
 *.pt

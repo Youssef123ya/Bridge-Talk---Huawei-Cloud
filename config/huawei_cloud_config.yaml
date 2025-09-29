@@ -1,0 +1,83 @@
+# Huawei Cloud Configuration for Arabic Sign Language Project
+
+# Authentication Configuration
+auth:
+  # Set these environment variables for security
+  access_key_id: "${HUAWEI_ACCESS_KEY_ID}"
+  secret_access_key: "${HUAWEI_SECRET_ACCESS_KEY}"
+  region: "af-north-1"  # AF-Cairo region
+  project_id: "${HUAWEI_PROJECT_ID}"
+
+# Object Storage Service (OBS) Configuration
+obs:
+  bucket_name: "arsl-youssef-af-cairo-2025"
+  endpoints:
+    af-north-1: "obs.af-north-1.myhuaweicloud.com"
+    ap-southeast-1: "obs.ap-southeast-1.myhuaweicloud.com"
+    cn-north-1: "obs.cn-north-1.myhuaweicloud.com"
+  
+  # Data organization in OBS
+  paths:
+    raw_data: "datasets/raw/"
+    processed_data: "datasets/processed/"
+    models: "models/"
+    checkpoints: "checkpoints/"
+    logs: "logs/"
+    experiments: "experiments/"
+
+# ModelArts Configuration
+modelarts:
+  # Training Job Configuration
+  training:
+    compute_type: "modelarts.vm.gpu.p4"  # GPU instance for training
+    framework: "PyTorch-1.8.0-python3.7-cuda10.2-ubuntu18.04"
+    code_dir: "/obs/arsl-recognition-data/code/"
+    boot_file: "train.py"
+    data_source: "/obs/arsl-recognition-data/datasets/"
+    output_path: "/obs/arsl-recognition-data/output/"
+    
+  # Inference Configuration
+  inference:
+    model_name: "arsl-recognition-model"
+    model_version: "1.0"
+    runtime: "python3.7"
+    instance_count: 1
+    compute_type: "modelarts.vm.cpu.2u"
+
+# API Gateway Configuration
+api_gateway:
+  api_name: "arsl-recognition-api"
+  group_name: "ml-apis"
+  description: "Arabic Sign Language Recognition API"
+  
+  # API endpoints
+  endpoints:
+    predict: "/predict"
+    batch_predict: "/batch_predict"
+    health: "/health"
+
+# Cloud Eye Monitoring
+monitoring:
+  metrics:
+    - name: "training_loss"
+      namespace: "SYS.ModelArts"
+    - name: "validation_accuracy"
+      namespace: "SYS.ModelArts"
+    - name: "inference_latency"
+      namespace: "SYS.APIG"
+  
+  # Alert thresholds
+  alerts:
+    high_inference_latency: 1000  # ms
+    low_model_accuracy: 0.85
+    high_error_rate: 0.05
+
+# Experiment Tracking
+experiments:
+  experiment_name: "arsl-cnn-experiments"
+  description: "Arabic Sign Language CNN model experiments"
+  tags:
+    - "computer-vision"
+    - "sign-language"
+    - "cnn"
+    - "arabic"

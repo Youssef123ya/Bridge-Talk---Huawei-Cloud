@@ -31,6 +31,15 @@ pytest>=7.0.0
 # Configuration management
 python-dotenv>=1.0.0
 
+# Huawei Cloud SDK
+huaweicloudsdkcore>=3.1.0
+huaweicloudsdkobs>=3.1.0
+huaweicloudsdkmodelarts>=3.1.0
+huaweicloudsdkapig>=3.1.0
+huaweicloudsdkces>=3.1.0
+huaweicloudsdkecs>=3.1.0
+esdk-obs-python>=3.22.2
+
 # Additional utilities for model development
 tensorboard>=2.13.0
 wandb>=0.15.0
