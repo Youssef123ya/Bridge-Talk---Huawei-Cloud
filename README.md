@@ -3,7 +3,43 @@
 A deep learning project for recognizing Arabic Sign Language (ArSL) gestures using computer vision techniques.
 
 ## 🎯 Project Overview
+ Huawei Cloud Integration Summary
+🌟 Services Integrated:
+Object Storage Service (OBS) - For dataset and model storage
+ModelArts - For distributed training and model management
+API Gateway - For REST API deployment
+Cloud Eye - For monitoring and alerting
+Elastic Cloud Server (ECS) - For scalable compute
+📁 New Files Created:
+File	Purpose
+huawei_cloud_config.yaml	Cloud configuration settings
+huawei_storage.py	OBS integration for data storage
+huawei_modelarts.py	ModelArts training management
+train_arsl.py	Cloud-optimized training script
+inference_service.py	Real-time inference service
+api_deployment.py	API Gateway deployment
+setup_huawei_cloud.py	Complete automated setup
+HUAWEI_CLOUD_INTEGRATION.md	Comprehensive documentation
+🚀 Key Features:
+✅ Automated Dataset Upload to OBS with progress tracking
+✅ Distributed Training on GPU instances with ModelArts
+✅ Real-time Inference with REST API endpoints
+✅ Auto-scaling and load balancing capabilities
+✅ Monitoring & Alerting with Cloud Eye integration
+✅ Security with IAM roles and encryption
+✅ Cost Optimization recommendations
 
+🛠️ Quick Start Commands:
+# 1. Set up environment variables
+$env:HUAWEI_ACCESS_KEY_ID = "your_access_key"
+$env:HUAWEI_SECRET_ACCESS_KEY = "your_secret_key"
+$env:HUAWEI_PROJECT_ID = "your_project_id"
+
+# 2. Install cloud dependencies
+pip install -r requirements.txt
+
+# 3. Run complete setup
+python scripts\setup_huawei_cloud.py --upload-data --start-training
 This project implements a CNN-based approach to classify Arabic sign language gestures representing the 32 letters of the Arabic alphabet. The dataset contains over 108,000 images across 32 classes.
 
 ## 📊 Dataset Statistics
