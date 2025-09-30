@@ -136,4 +136,4 @@ python scripts\test_data_pipeline.py
 
 View the generated analysis files:
 - `data/analysis/class_distribution.png` - Class distribution visualization
-- `data/analysis/validation_report.txt` - Detailed dataset report�
+- `data/analysis/validation_report.txt` - Detailed dataset report
