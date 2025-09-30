@@ -1,0 +1,102 @@
+{
+  "arsl_application_metrics": {
+    "namespace": "ARSL/Application",
+    "metrics": [
+      {
+        "metric_name": "prediction_requests",
+        "unit": "Count",
+        "description": "Number of prediction requests",
+        "dimensions": [
+          {
+            "name": "api_endpoint",
+            "value": "predict"
+          },
+          {
+            "name": "request_type",
+            "value": "single"
+          }
+        ]
+      },
+      {
+        "metric_name": "prediction_accuracy",
+        "unit": "Percent",
+        "description": "Model prediction accuracy rate",
+        "dimensions": [
+          {
+            "name": "model_version",
+            "value": "1.0.0"
+          },
+          {
+            "name": "confidence_threshold",
+            "value": "0.8"
+          }
+        ]
+      },
+      {
+        "metric_name": "processing_time",
+        "unit": "Milliseconds",
+        "description": "Image processing and inference time",
+        "dimensions": [
+          {
+            "name": "processing_stage",
+            "value": "inference"
+          },
+          {
+            "name": "model_type",
+            "value": "cnn"
+          }
+        ]
+      }
+    ]
+  },
+  "arsl_business_metrics": {
+    "namespace": "ARSL/Business",
+    "metrics": [
+      {
+        "metric_name": "popular_arabic_classes",
+        "unit": "Count",
+        "description": "Most predicted Arabic letter classes",
+        "dimensions": [
+          {
+            "name": "arabic_letter",
+            "value": "variable"
+          },
+          {
+            "name": "confidence_level",
+            "value": "high"
+          }
+        ]
+      },
+      {
+        "metric_name": "user_engagement",
+        "unit": "Count",
+        "description": "User interaction metrics",
+        "dimensions": [
+          {
+            "name": "session_duration",
+            "value": "minutes"
+          },
+          {
+            "name": "user_type",
+            "value": "api_client"
+          }
+        ]
+      },
+      {
+        "metric_name": "data_volume_processed",
+        "unit": "Megabytes",
+        "description": "Volume of image data processed",
+        "dimensions": [
+          {
+            "name": "data_type",
+            "value": "image"
+          },
+          {
+            "name": "format",
+            "value": "jpeg"
+          }
+        ]
+      }
+    ]
+  }
+}

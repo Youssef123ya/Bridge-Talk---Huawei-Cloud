@@ -1,0 +1,131 @@
+{
+  "operational_runbook": {
+    "system_overview": {
+      "project": "Arabic Sign Language Recognition (ARSL)",
+      "environment": "Production",
+      "infrastructure": {
+        "compute": "ECS c6.xlarge (4 vCPUs, 8GB RAM)",
+        "monitoring": "Cloud Eye with custom dashboards",
+        "notifications": "SMN (SMS + Email + Webhook)",
+        "region": "AF-Cairo (af-north-1)",
+        "account": "yyacoup"
+      },
+      "key_components": [
+        "ARSL ML Model API",
+        "Nginx Reverse Proxy",
+        "Cloud Eye Monitoring Agent",
+        "Custom Metrics Collection"
+      ]
+    },
+    "daily_operations": {
+      "morning_checks": [
+        {
+          "task": "System Health Check",
+          "frequency": "Daily 9:00 AM",
+          "steps": [
+            "Check Cloud Eye dashboard: https://console.huaweicloud.com/ces",
+            "Verify all instances are running",
+            "Review overnight alerts and incidents",
+            "Check system resource utilization trends"
+          ],
+          "escalation": "If critical issues found, follow incident response"
+        },
+        {
+          "task": "Performance Review",
+          "frequency": "Daily 9:15 AM",
+          "steps": [
+            "Review API response times (target: <500ms)",
+            "Check error rates (target: <1%)",
+            "Verify model prediction accuracy metrics",
+            "Monitor request volume trends"
+          ],
+          "escalation": "If SLA breached, investigate root cause"
+        }
+      ],
+      "weekly_maintenance": [
+        {
+          "task": "System Updates",
+          "frequency": "Sundays 2:00 AM",
+          "steps": [
+            "Update ECS instance security patches",
+            "Update monitoring agent if needed",
+            "Review and rotate log files",
+            "Backup system configuration"
+          ],
+          "duration": "30 minutes",
+          "downtime": "Expected 5-10 minutes"
+        },
+        {
+          "task": "Monitoring Health Check",
+          "frequency": "Sundays 3:00 AM",
+          "steps": [
+            "Test all alert rules manually",
+            "Verify notification delivery",
+            "Review and clean old monitoring data",
+            "Update alert thresholds if needed"
+          ],
+          "duration": "20 minutes"
+        }
+      ]
+    },
+    "incident_response": {
+      "severity_levels": {
+        "critical": {
+          "definition": "Service completely down or major functionality unavailable",
+          "response_time": "5 minutes",
+          "escalation": "Immediate SMS + Email to on-call engineer",
+          "examples": [
+            "API completely unreachable",
+            "ECS instance down",
+            "Model inference failing"
+          ]
+        },
+        "warning": {
+          "definition": "Degraded performance or minor issues",
+          "response_time": "30 minutes",
+          "escalation": "Email notification to engineering team",
+          "examples": [
+            "High response times",
+            "Elevated error rates",
+            "Resource utilization high"
+          ]
+        },
+        "informational": {
+          "definition": "Operational information or trends",
+          "response_time": "Next business day",
+          "escalation": "Dashboard notification only",
+          "examples": [
+            "Usage pattern changes",
+            "Capacity planning alerts"
+          ]
+        }
+      },
+      "response_procedures": [
+        {
+          "incident_type": "Service Down",
+          "immediate_actions": [
+            "1. Check ECS instance status in console",
+            "2. Attempt to restart services: sudo systemctl restart nginx",
+            "3. Check system logs: journalctl -u nginx -f",
+            "4. If instance down, restart via ECS console",
+            "5. Monitor recovery and verify service restoration"
+          ],
+          "communication": "Update status page, notify stakeholders",
+          "post_incident": "Conduct root cause analysis within 24 hours"
+        },
+        {
+          "incident_type": "High Resource Usage",
+          "immediate_actions": [
+            "1. Identify resource bottleneck (CPU/Memory/Disk)",
+            "2. Check for unusual traffic patterns",
+            "3. Review recent deployments or changes",
+            "4. Scale resources if needed (ECS console)",
+            "5. Implement temporary traffic limiting if required"
+          ],
+          "communication": "Internal team notification",
+          "post_incident": "Review capacity planning and scaling policies"
+        }
+      ]
+    }
+  }
+}

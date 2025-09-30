@@ -1,0 +1,68 @@
+{
+  "cloud_eye_config": {
+    "dashboard_name": "ARSL Production Monitor",
+    "refresh_interval": "30s",
+    "custom_metrics": [
+      {
+        "name": "arsl_prediction_accuracy",
+        "namespace": "ARSL/API",
+        "unit": "Percent",
+        "description": "Model prediction accuracy rate"
+      },
+      {
+        "name": "arsl_daily_predictions",
+        "namespace": "ARSL/Business",
+        "unit": "Count",
+        "description": "Number of predictions per day"
+      },
+      {
+        "name": "arsl_response_time",
+        "namespace": "ARSL/Performance",
+        "unit": "Milliseconds",
+        "description": "API response time"
+      }
+    ]
+  },
+  "alerting_rules": {
+    "critical": [
+      {
+        "name": "Service Down",
+        "condition": "Health check failure",
+        "threshold": "3 failures",
+        "action": "SMS + Email"
+      },
+      {
+        "name": "High Error Rate",
+        "condition": "Error rate > 10%",
+        "threshold": "10%",
+        "action": "Email + Webhook"
+      },
+      {
+        "name": "Resource Exhaustion",
+        "condition": "CPU > 90%",
+        "threshold": "90%",
+        "action": "Auto-scale + Alert"
+      }
+    ],
+    "warning": [
+      {
+        "name": "Response Time High",
+        "condition": "P95 > 1000ms",
+        "threshold": "1000ms",
+        "action": "Email"
+      },
+      {
+        "name": "Storage Usage High",
+        "condition": "Usage > 80%",
+        "threshold": "80%",
+        "action": "Email"
+      },
+      {
+        "name": "Accuracy Drop",
+        "condition": "Accuracy < 85%",
+        "threshold": "85%",
+        "action": "Email"
+      }
+    ]
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "notification_topics": [
+    {
+      "topic_name": "ARSL-Critical-Alerts",
+      "display_name": "ARSL Critical System Alerts",
+      "description": "Critical alerts requiring immediate response",
+      "subscription_types": [
+        "SMS",
+        "Email",
+        "HTTP/HTTPS"
+      ],
+      "subscribers": [
+        {
+          "protocol": "sms",
+          "endpoint": "+201234567890",
+          "filter_policy": {
+            "severity": [
+              "critical",
+              "emergency"
+            ]
+          }
+        },
+        {
+          "protocol": "email",
+          "endpoint": "alerts@yourdomain.com",
+          "filter_policy": {
+            "severity": [
+              "critical",
+              "emergency",
+              "warning"
+            ]
+          }
+        },
+        {
+          "protocol": "http",
+          "endpoint": "https://your-webhook-url.com/alerts",
+          "filter_policy": {
+            "severity": [
+              "critical",
+              "emergency"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "topic_name": "ARSL-Warning-Alerts",
+      "display_name": "ARSL Warning Alerts",
+      "description": "Performance and operational warnings",
+      "subscription_types": [
+        "Email",
+        "HTTP/HTTPS"
+      ],
+      "subscribers": [
+        {
+          "protocol": "email",
+          "endpoint": "monitoring@yourdomain.com",
+          "filter_policy": {
+            "severity": [
+              "warning",
+              "info"
+            ]
+          }
+        },
+        {
+          "protocol": "http",
+          "endpoint": "https://your-monitoring-webhook.com/warnings",
+          "filter_policy": {
+            "component": [
+              "api",
+              "model",
+              "system"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "topic_name": "ARSL-Business-Alerts",
+      "display_name": "ARSL Business Metrics",
+      "description": "Business analytics and daily reports",
+      "subscription_types": [
+        "Email"
+      ],
+      "subscribers": [
+        {
+          "protocol": "email",
+          "endpoint": "business@yourdomain.com",
+          "filter_policy": {
+            "report_type": [
+              "daily",
+              "weekly",
+              "monthly"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

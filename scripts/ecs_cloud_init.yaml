@@ -1,0 +1,230 @@
+#cloud-config
+
+# ARSL Project - ECS Instance Initialization
+# Automatically configures instance for production deployment
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - curl
+  - wget
+  - git
+  - htop
+  - nano
+  - unzip
+  - python3
+  - python3-pip
+  - python3-venv
+  - docker.io
+  - docker-compose
+  - nginx
+  - certbot
+  - python3-certbot-nginx
+  - jq
+  - awscli
+
+users:
+  - name: arsl
+    groups: sudo, docker
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... # Add your public key here
+
+write_files:
+  - path: /opt/arsl/config.json
+    content: |
+      {
+        "project": "ARSL",
+        "environment": "production",
+        "api_endpoint": "https://arsl-api.apig.af-north-1.huaweicloudapis.com",
+        "monitoring_interval": 30,
+        "log_level": "INFO"
+      }
+    permissions: '0644'
+    
+  - path: /etc/nginx/sites-available/arsl-proxy
+    content: |
+      server {
+          listen 80;
+          server_name _;
+          
+          # Health check endpoint
+          location /health {
+              return 200 "healthy\n";
+              add_header Content-Type text/plain;
+          }
+          
+          # Metrics endpoint
+          location /metrics {
+              proxy_pass http://localhost:9090/metrics;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+          }
+          
+          # API proxy
+          location /api/ {
+              proxy_pass https://arsl-api.apig.af-north-1.huaweicloudapis.com/;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              
+              # CORS headers
+              add_header Access-Control-Allow-Origin *;
+              add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+              add_header Access-Control-Allow-Headers "Content-Type, Authorization";
+          }
+          
+          # Static files for monitoring dashboard
+          location /dashboard/ {
+              alias /opt/arsl/dashboard/;
+              index index.html;
+          }
+      }
+    permissions: '0644'
+
+  - path: /opt/arsl/monitor.py
+    content: |
+      #!/usr/bin/env python3
+      import psutil
+      import requests
+      import time
+      import json
+      from datetime import datetime
+      
+      class ARSLMonitor:
+          def __init__(self):
+              self.api_base = "https://arsl-api.apig.af-north-1.huaweicloudapis.com"
+              
+          def collect_metrics(self):
+              return {
+                  "timestamp": datetime.now().isoformat(),
+                  "cpu_percent": psutil.cpu_percent(interval=1),
+                  "memory_percent": psutil.virtual_memory().percent,
+                  "disk_percent": psutil.disk_usage('/').percent,
+                  "load_avg": psutil.getloadavg()[0] if hasattr(psutil, 'getloadavg') else 0
+              }
+          
+          def test_api_health(self):
+              try:
+                  start = time.time()
+                  resp = requests.get(f"{self.api_base}/v1/health", timeout=10)
+                  return {
+                      "status": "healthy" if resp.status_code == 200 else "unhealthy",
+                      "response_time": (time.time() - start) * 1000,
+                      "status_code": resp.status_code
+                  }
+              except Exception as e:
+                  return {"status": "error", "error": str(e)}
+          
+          def run(self):
+              while True:
+                  try:
+                      metrics = self.collect_metrics()
+                      api_health = self.test_api_health()
+                      
+                      data = {"system": metrics, "api": api_health}
+                      print(f"[{metrics['timestamp']}] CPU: {metrics['cpu_percent']:.1f}% | "
+                            f"Memory: {metrics['memory_percent']:.1f}% | "
+                            f"API: {api_health['status']}")
+                      
+                      with open("/opt/arsl/metrics.log", "a") as f:
+                          f.write(json.dumps(data) + "\n")
+                      
+                      time.sleep(30)
+                  except Exception as e:
+                      print(f"Error: {e}")
+                      time.sleep(30)
+      
+      if __name__ == "__main__":
+          ARSLMonitor().run()
+    permissions: '0755'
+
+  - path: /etc/systemd/system/arsl-monitor.service
+    content: |
+      [Unit]
+      Description=ARSL System Monitor
+      After=network.target
+      
+      [Service]
+      Type=simple
+      User=arsl
+      WorkingDirectory=/opt/arsl
+      ExecStart=/usr/bin/python3 /opt/arsl/monitor.py
+      Restart=always
+      RestartSec=10
+      
+      [Install]
+      WantedBy=multi-user.target
+    permissions: '0644'
+
+runcmd:
+  # Create directories
+  - mkdir -p /opt/arsl/{logs,dashboard,backups}
+  - chown -R arsl:arsl /opt/arsl
+  
+  # Configure Docker
+  - systemctl start docker
+  - systemctl enable docker
+  - usermod -aG docker ubuntu
+  - usermod -aG docker arsl
+  
+  # Configure Nginx
+  - ln -s /etc/nginx/sites-available/arsl-proxy /etc/nginx/sites-enabled/
+  - rm -f /etc/nginx/sites-enabled/default
+  - nginx -t
+  - systemctl restart nginx
+  - systemctl enable nginx
+  
+  # Install Python packages
+  - pip3 install requests psutil fastapi uvicorn prometheus-client schedule
+  
+  # Download and install Cloud Eye agent
+  - cd /tmp
+  - wget -q https://ces-agent.obs.af-north-1.myhuaweicloud.com/ces-agent.tar.gz
+  - tar -xzf ces-agent.tar.gz
+  - cd ces-agent
+  - ./install.sh
+  
+  # Start monitoring service
+  - systemctl daemon-reload
+  - systemctl enable arsl-monitor
+  - systemctl start arsl-monitor
+  
+  # Configure log rotation
+  - echo "/opt/arsl/metrics.log { daily rotate 7 compress missingok notifempty }" > /etc/logrotate.d/arsl
+  
+  # Set up backup cron job
+  - echo "0 2 * * * root tar -czf /opt/arsl/backups/daily_backup_$(date +\%Y\%m\%d).tar.gz /opt/arsl/logs /var/log/nginx" | crontab -
+  
+  # Create status check script
+  - echo '#!/bin/bash
+    echo "=== ARSL System Status ==="
+    echo "Date: $(date)"
+    echo "Uptime: $(uptime)"
+    echo "Disk Usage: $(df -h / | tail -1)"
+    echo "Memory Usage: $(free -h)"
+    echo "Docker Status: $(systemctl is-active docker)"
+    echo "Nginx Status: $(systemctl is-active nginx)"
+    echo "Monitor Status: $(systemctl is-active arsl-monitor)"
+    echo "API Health: $(curl -s http://localhost/health)"
+    ' > /opt/arsl/status.sh
+  - chmod +x /opt/arsl/status.sh
+
+final_message: |
+  ARSL ECS Instance Setup Complete!
+  
+  Services Running:
+  - Nginx proxy: http://$(curl -s http://169.254.169.254/meta-data/public-ipv4)
+  - Health check: /health
+  - API proxy: /api/
+  - Metrics: /metrics
+  - System monitoring: Active
+  
+  Next Steps:
+  1. Configure SSL certificate (if domain available)
+  2. Set up Cloud Eye monitoring
+  3. Configure alerting rules
+  4. Test end-to-end monitoring

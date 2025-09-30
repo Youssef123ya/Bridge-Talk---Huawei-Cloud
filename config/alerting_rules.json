@@ -1,0 +1,209 @@
+{
+  "critical_alerts": [
+    {
+      "alert_name": "ECS_Instance_Down",
+      "description": "ECS instance is not responding or has stopped",
+      "metric": {
+        "namespace": "SYS.ECS",
+        "metric_name": "vm_status",
+        "dimensions": {
+          "instance_id": "i-xxxxxxxxx"
+        },
+        "statistic": "Maximum"
+      },
+      "condition": {
+        "comparison_operator": "LessThanThreshold",
+        "threshold": 1,
+        "evaluation_periods": 2,
+        "period": 60
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Critical-Alerts",
+        "auto_scaling": false,
+        "webhook": true
+      },
+      "severity": "critical",
+      "estimated_recovery_time": "5-15 minutes"
+    },
+    {
+      "alert_name": "API_Service_Unavailable",
+      "description": "API Gateway or inference service is down",
+      "metric": {
+        "namespace": "ARSL/API",
+        "metric_name": "health_check_response_time",
+        "statistic": "Average"
+      },
+      "condition": {
+        "comparison_operator": "LessThanThreshold",
+        "threshold": 0.1,
+        "evaluation_periods": 3,
+        "period": 60
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Critical-Alerts",
+        "auto_scaling": true,
+        "webhook": true
+      },
+      "severity": "critical",
+      "estimated_recovery_time": "2-10 minutes"
+    },
+    {
+      "alert_name": "High_Error_Rate",
+      "description": "API error rate exceeds acceptable threshold",
+      "metric": {
+        "namespace": "SYS.APIG",
+        "metric_name": "error_rate",
+        "statistic": "Average"
+      },
+      "condition": {
+        "comparison_operator": "GreaterThanThreshold",
+        "threshold": 10,
+        "evaluation_periods": 2,
+        "period": 300
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Critical-Alerts",
+        "auto_scaling": false,
+        "webhook": true
+      },
+      "severity": "critical",
+      "estimated_recovery_time": "10-30 minutes"
+    },
+    {
+      "alert_name": "Resource_Exhaustion",
+      "description": "System resources (CPU/Memory) critically high",
+      "metric": {
+        "namespace": "SYS.ECS",
+        "metric_name": "cpu_util",
+        "statistic": "Average"
+      },
+      "condition": {
+        "comparison_operator": "GreaterThanThreshold",
+        "threshold": 90,
+        "evaluation_periods": 3,
+        "period": 300
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Critical-Alerts",
+        "auto_scaling": true,
+        "webhook": true
+      },
+      "severity": "critical",
+      "estimated_recovery_time": "5-20 minutes"
+    }
+  ],
+  "warning_alerts": [
+    {
+      "alert_name": "High_Response_Time",
+      "description": "API response time degradation",
+      "metric": {
+        "namespace": "SYS.APIG",
+        "metric_name": "latency",
+        "statistic": "Average"
+      },
+      "condition": {
+        "comparison_operator": "GreaterThanThreshold",
+        "threshold": 1000,
+        "evaluation_periods": 3,
+        "period": 600
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Warning-Alerts",
+        "auto_scaling": false,
+        "webhook": true
+      },
+      "severity": "warning",
+      "estimated_recovery_time": "15-45 minutes"
+    },
+    {
+      "alert_name": "Memory_Usage_High",
+      "description": "Memory utilization approaching limits",
+      "metric": {
+        "namespace": "SYS.ECS",
+        "metric_name": "mem_util",
+        "statistic": "Average"
+      },
+      "condition": {
+        "comparison_operator": "GreaterThanThreshold",
+        "threshold": 75,
+        "evaluation_periods": 4,
+        "period": 300
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Warning-Alerts",
+        "auto_scaling": false,
+        "webhook": false
+      },
+      "severity": "warning",
+      "estimated_recovery_time": "30-60 minutes"
+    },
+    {
+      "alert_name": "Storage_Usage_High",
+      "description": "OBS storage usage approaching quota",
+      "metric": {
+        "namespace": "SYS.OBS",
+        "metric_name": "storage_size",
+        "statistic": "Maximum"
+      },
+      "condition": {
+        "comparison_operator": "GreaterThanThreshold",
+        "threshold": 1000000,
+        "evaluation_periods": 1,
+        "period": 3600
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Warning-Alerts",
+        "auto_scaling": false,
+        "webhook": false
+      },
+      "severity": "warning",
+      "estimated_recovery_time": "1-4 hours"
+    }
+  ],
+  "business_alerts": [
+    {
+      "alert_name": "Model_Accuracy_Drop",
+      "description": "Model prediction accuracy below acceptable level",
+      "metric": {
+        "namespace": "ARSL/Business",
+        "metric_name": "prediction_accuracy",
+        "statistic": "Average"
+      },
+      "condition": {
+        "comparison_operator": "LessThanThreshold",
+        "threshold": 85,
+        "evaluation_periods": 6,
+        "period": 600
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Business-Alerts",
+        "auto_scaling": false,
+        "webhook": true
+      },
+      "severity": "warning",
+      "estimated_recovery_time": "2-8 hours"
+    },
+    {
+      "alert_name": "Unusual_Traffic_Pattern",
+      "description": "Unexpected increase in API traffic",
+      "metric": {
+        "namespace": "SYS.APIG",
+        "metric_name": "req_count",
+        "statistic": "Sum"
+      },
+      "condition": {
+        "comparison_operator": "GreaterThanThreshold",
+        "threshold": 1000,
+        "evaluation_periods": 2,
+        "period": 600
+      },
+      "alarm_actions": {
+        "notification_topic": "ARSL-Business-Alerts",
+        "auto_scaling": true,
+        "webhook": true
+      },
+      "severity": "info",
+      "estimated_recovery_time": "Monitor and analyze"
+    }
+  ]
+}

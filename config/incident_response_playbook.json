@@ -1,0 +1,89 @@
+{
+  "incident_response_playbook": {
+    "critical_alerts": {
+      "ECS_Instance_Down": {
+        "immediate_actions": [
+          "Check ECS console for instance status",
+          "Attempt to restart instance if stopped",
+          "Check security group and network settings",
+          "Review system logs for crash indicators",
+          "If unable to restart, launch new instance"
+        ],
+        "escalation_timeline": "15 minutes",
+        "recovery_sla": "30 minutes",
+        "rollback_plan": "Launch backup instance, redirect traffic"
+      },
+      "API_Service_Unavailable": {
+        "immediate_actions": [
+          "Check API Gateway console status",
+          "Verify ModelArts inference service status",
+          "Test direct service endpoints",
+          "Check service logs for errors",
+          "Restart services if necessary"
+        ],
+        "escalation_timeline": "10 minutes",
+        "recovery_sla": "20 minutes",
+        "rollback_plan": "Switch to backup API endpoint"
+      },
+      "High_Error_Rate": {
+        "immediate_actions": [
+          "Identify error patterns in logs",
+          "Check model service health",
+          "Verify input data quality",
+          "Review recent deployments",
+          "Implement circuit breaker if needed"
+        ],
+        "escalation_timeline": "20 minutes",
+        "recovery_sla": "45 minutes",
+        "rollback_plan": "Revert to previous model version"
+      },
+      "Resource_Exhaustion": {
+        "immediate_actions": [
+          "Identify resource-consuming processes",
+          "Scale up instance if auto-scaling failed",
+          "Implement rate limiting",
+          "Clear temporary files and caches",
+          "Restart services to free memory"
+        ],
+        "escalation_timeline": "15 minutes",
+        "recovery_sla": "30 minutes",
+        "rollback_plan": "Reduce traffic load, scale horizontally"
+      }
+    },
+    "warning_alerts": {
+      "High_Response_Time": {
+        "investigation_steps": [
+          "Check database performance",
+          "Review model inference time",
+          "Analyze network latency",
+          "Check for resource contention",
+          "Review recent code changes"
+        ],
+        "monitoring_period": "2 hours",
+        "escalation_threshold": "No improvement in 2 hours"
+      },
+      "Memory_Usage_High": {
+        "investigation_steps": [
+          "Identify memory-consuming processes",
+          "Check for memory leaks",
+          "Review application logs",
+          "Analyze garbage collection patterns",
+          "Consider memory optimization"
+        ],
+        "monitoring_period": "4 hours",
+        "escalation_threshold": "Memory usage >85%"
+      }
+    },
+    "contact_information": {
+      "on_call_engineer": "+201234567890",
+      "escalation_manager": "+201234567891",
+      "business_contact": "business@yourdomain.com",
+      "technical_lead": "tech@yourdomain.com"
+    },
+    "communication_channels": {
+      "emergency": "SMS + Phone call",
+      "urgent": "Email + Slack",
+      "normal": "Email + Ticket system"
+    }
+  }
+}

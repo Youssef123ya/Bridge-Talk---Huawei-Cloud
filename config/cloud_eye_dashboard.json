@@ -1,0 +1,234 @@
+{
+  "dashboard_name": "ARSL Production Monitor",
+  "description": "Comprehensive monitoring for Arabic Sign Language Recognition system",
+  "refresh_interval": "30s",
+  "time_range": "1h",
+  "panels": [
+    {
+      "id": "system_overview",
+      "title": "System Overview",
+      "type": "stat",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 6
+      },
+      "metrics": [
+        {
+          "name": "ECS Instance Status",
+          "namespace": "SYS.ECS",
+          "metric": "vm_status",
+          "dimensions": {
+            "instance_id": "i-xxxxxxxxx"
+          },
+          "unit": "Count",
+          "stat": "Maximum"
+        },
+        {
+          "name": "API Gateway Health",
+          "namespace": "SYS.APIG",
+          "metric": "api_status",
+          "unit": "Count",
+          "stat": "Average"
+        },
+        {
+          "name": "ModelArts Service",
+          "namespace": "SYS.ModelArts",
+          "metric": "service_status",
+          "unit": "Count",
+          "stat": "Maximum"
+        }
+      ]
+    },
+    {
+      "id": "performance_metrics",
+      "title": "Performance Metrics",
+      "type": "graph",
+      "position": {
+        "x": 0,
+        "y": 6,
+        "w": 12,
+        "h": 8
+      },
+      "metrics": [
+        {
+          "name": "CPU Utilization",
+          "namespace": "SYS.ECS",
+          "metric": "cpu_util",
+          "unit": "Percent",
+          "color": "#FF6B6B"
+        },
+        {
+          "name": "Memory Usage",
+          "namespace": "SYS.ECS",
+          "metric": "mem_util",
+          "unit": "Percent",
+          "color": "#4ECDC4"
+        },
+        {
+          "name": "Disk Usage",
+          "namespace": "SYS.ECS",
+          "metric": "disk_util",
+          "unit": "Percent",
+          "color": "#45B7D1"
+        }
+      ],
+      "thresholds": [
+        {
+          "value": 70,
+          "color": "yellow",
+          "label": "Warning"
+        },
+        {
+          "value": 90,
+          "color": "red",
+          "label": "Critical"
+        }
+      ]
+    },
+    {
+      "id": "api_performance",
+      "title": "API Performance",
+      "type": "graph",
+      "position": {
+        "x": 12,
+        "y": 6,
+        "w": 12,
+        "h": 8
+      },
+      "metrics": [
+        {
+          "name": "Request Rate",
+          "namespace": "SYS.APIG",
+          "metric": "req_count",
+          "unit": "Count/Second",
+          "color": "#96CEB4"
+        },
+        {
+          "name": "Response Time",
+          "namespace": "SYS.APIG",
+          "metric": "latency",
+          "unit": "Milliseconds",
+          "color": "#FFEAA7"
+        },
+        {
+          "name": "Error Rate",
+          "namespace": "SYS.APIG",
+          "metric": "error_count",
+          "unit": "Percent",
+          "color": "#FD79A8"
+        }
+      ]
+    },
+    {
+      "id": "model_metrics",
+      "title": "Model Performance",
+      "type": "stat",
+      "position": {
+        "x": 0,
+        "y": 14,
+        "w": 8,
+        "h": 6
+      },
+      "metrics": [
+        {
+          "name": "Inference Latency",
+          "namespace": "ARSL/ModelArts",
+          "metric": "inference_time",
+          "unit": "Milliseconds",
+          "thresholds": [
+            {
+              "min": 0,
+              "max": 300,
+              "color": "green"
+            },
+            {
+              "min": 300,
+              "max": 800,
+              "color": "yellow"
+            },
+            {
+              "min": 800,
+              "max": 9999,
+              "color": "red"
+            }
+          ]
+        },
+        {
+          "name": "Prediction Accuracy",
+          "namespace": "ARSL/Business",
+          "metric": "accuracy_rate",
+          "unit": "Percent",
+          "thresholds": [
+            {
+              "min": 95,
+              "max": 100,
+              "color": "green"
+            },
+            {
+              "min": 85,
+              "max": 95,
+              "color": "yellow"
+            },
+            {
+              "min": 0,
+              "max": 85,
+              "color": "red"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "business_metrics",
+      "title": "Business Metrics",
+      "type": "graph",
+      "position": {
+        "x": 8,
+        "y": 14,
+        "w": 8,
+        "h": 6
+      },
+      "metrics": [
+        {
+          "name": "Daily Predictions",
+          "namespace": "ARSL/Business",
+          "metric": "daily_predictions",
+          "unit": "Count"
+        },
+        {
+          "name": "Active Users",
+          "namespace": "ARSL/Business",
+          "metric": "active_users",
+          "unit": "Count"
+        }
+      ]
+    },
+    {
+      "id": "storage_metrics",
+      "title": "Storage & Network",
+      "type": "graph",
+      "position": {
+        "x": 16,
+        "y": 14,
+        "w": 8,
+        "h": 6
+      },
+      "metrics": [
+        {
+          "name": "OBS Storage Usage",
+          "namespace": "SYS.OBS",
+          "metric": "storage_size",
+          "unit": "Gigabytes"
+        },
+        {
+          "name": "Network I/O",
+          "namespace": "SYS.ECS",
+          "metric": "network_bytes",
+          "unit": "Bytes/Second"
+        }
+      ]
+    }
+  ]
+}

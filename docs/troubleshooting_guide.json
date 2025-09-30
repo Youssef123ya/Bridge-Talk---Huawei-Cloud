@@ -1,0 +1,90 @@
+{
+  "troubleshooting_guide": {
+    "common_issues": [
+      {
+        "issue": "API Response Times High",
+        "symptoms": [
+          "Response times > 1000ms",
+          "Client timeouts",
+          "Poor user experience"
+        ],
+        "diagnosis_steps": [
+          "Check ECS instance CPU/Memory usage",
+          "Review nginx access logs for patterns",
+          "Monitor model inference latency",
+          "Check network connectivity"
+        ],
+        "solutions": [
+          "Restart nginx: sudo systemctl restart nginx",
+          "Scale ECS instance to larger size",
+          "Optimize model inference code",
+          "Implement request caching"
+        ],
+        "prevention": "Monitor performance trends, implement auto-scaling"
+      },
+      {
+        "issue": "High Error Rate",
+        "symptoms": [
+          "HTTP 5xx errors",
+          "Model prediction failures",
+          "Client complaints"
+        ],
+        "diagnosis_steps": [
+          "Check application logs: tail -f /var/log/arsl/app.log",
+          "Review nginx error logs: tail -f /var/log/nginx/error.log",
+          "Test API endpoints manually",
+          "Check model file integrity"
+        ],
+        "solutions": [
+          "Restart application services",
+          "Restore from latest backup",
+          "Reload model files",
+          "Check input data validation"
+        ],
+        "prevention": "Implement health checks, automated testing"
+      },
+      {
+        "issue": "Monitoring Data Missing",
+        "symptoms": [
+          "Empty dashboard panels",
+          "No recent metrics",
+          "Alert rules not triggering"
+        ],
+        "diagnosis_steps": [
+          "Check Cloud Eye agent status: systemctl status telescope",
+          "Verify agent configuration: /usr/local/telescope/etc/telescope.conf",
+          "Test metrics collection manually",
+          "Check network connectivity to Cloud Eye"
+        ],
+        "solutions": [
+          "Restart monitoring agent: sudo systemctl restart telescope",
+          "Reconfigure agent with correct credentials",
+          "Update agent to latest version",
+          "Check firewall rules for outbound connections"
+        ],
+        "prevention": "Monitor agent health, automated checks"
+      }
+    ],
+    "useful_commands": {
+      "system_status": [
+        "systemctl status nginx",
+        "systemctl status telescope",
+        "df -h",
+        "free -m",
+        "top -p $(pgrep -d',' nginx)"
+      ],
+      "log_analysis": [
+        "tail -f /var/log/nginx/access.log",
+        "tail -f /var/log/nginx/error.log",
+        "journalctl -u nginx -f",
+        "grep ERROR /var/log/arsl/app.log"
+      ],
+      "network_debugging": [
+        "curl -I http://localhost/health",
+        "netstat -tlnp | grep 80",
+        "ping api.huaweicloud.com",
+        "nslookup console.huaweicloud.com"
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "job_name": "arsl-recognition-training-v1",
+  "description": "Arabic Sign Language Recognition CNN Training",
+  "algorithm_config": {
+    "code_dir": "obs://arsl-youssef-af-cairo-2025/code/",
+    "boot_file": "train_arsl.py",
+    "engine_id": 122,
+    "python_version": "python3.7"
+  },
+  "data_config": {
+    "train_url": "obs://arsl-youssef-af-cairo-2025/datasets/raw/",
+    "data_url": "obs://arsl-youssef-af-cairo-2025/datasets/processed/",
+    "output_url": "obs://arsl-youssef-af-cairo-2025/output/",
+    "log_url": "obs://arsl-youssef-af-cairo-2025/logs/"
+  },
+  "resource_config": {
+    "flavor": "modelarts.vm.gpu.v100",
+    "node_count": 1,
+    "parameter_server_count": 0,
+    "worker_count": 1
+  },
+  "hyperparameters": {
+    "batch_size": "64",
+    "learning_rate": "0.001",
+    "epochs": "100",
+    "optimizer": "adam",
+    "patience": "15",
+    "min_delta": "0.001",
+    "validation_split": "0.2",
+    "random_seed": "42",
+    "num_classes": "32",
+    "image_size": "64",
+    "channels": "1"
+  },
+  "max_running_time": 28800,
+  "auto_terminate_time": 86400
+}

@@ -1,0 +1,77 @@
+{
+  "monitoring_test_suite": {
+    "infrastructure_tests": [
+      {
+        "test_name": "ECS_Instance_Metrics",
+        "description": "Verify ECS instance metrics are collected",
+        "test_type": "automated",
+        "expected_metrics": [
+          "cpu_util",
+          "mem_util",
+          "disk_util",
+          "network_bytes"
+        ],
+        "success_criteria": "All metrics present in Cloud Eye dashboard",
+        "test_duration": "5 minutes"
+      },
+      {
+        "test_name": "Cloud_Eye_Dashboard",
+        "description": "Verify dashboard displays all panels correctly",
+        "test_type": "manual",
+        "expected_panels": [
+          "System Overview",
+          "Performance Metrics",
+          "API Performance"
+        ],
+        "success_criteria": "All panels show real-time data",
+        "test_duration": "3 minutes"
+      }
+    ],
+    "alert_tests": [
+      {
+        "test_name": "Critical_Alert_Triggers",
+        "description": "Test critical alert conditions",
+        "test_scenarios": [
+          {
+            "scenario": "High CPU usage",
+            "trigger": "Load CPU to >90%"
+          },
+          {
+            "scenario": "Service down",
+            "trigger": "Stop nginx service"
+          },
+          {
+            "scenario": "High error rate",
+            "trigger": "Simulate API errors"
+          }
+        ],
+        "success_criteria": "Alerts trigger within 5 minutes",
+        "test_duration": "20 minutes"
+      }
+    ],
+    "notification_tests": [
+      {
+        "test_name": "SMS_Notifications",
+        "description": "Test SMS alert delivery",
+        "test_steps": [
+          "Trigger critical alert",
+          "Verify SMS received within 2 minutes",
+          "Check SMS content formatting"
+        ],
+        "success_criteria": "SMS received with correct alert info",
+        "test_duration": "5 minutes"
+      },
+      {
+        "test_name": "Email_Notifications",
+        "description": "Test email alert delivery and formatting",
+        "test_steps": [
+          "Trigger different alert types",
+          "Check email delivery time",
+          "Verify email formatting and content"
+        ],
+        "success_criteria": "All emails received and properly formatted",
+        "test_duration": "8 minutes"
+      }
+    ]
+  }
+}

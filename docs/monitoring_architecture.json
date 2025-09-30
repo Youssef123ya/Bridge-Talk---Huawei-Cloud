@@ -1,0 +1,147 @@
+{
+  "monitoring_architecture": {
+    "overview": {
+      "description": "Comprehensive monitoring system for ARSL production environment",
+      "design_principles": [
+        "Real-time visibility into system health",
+        "Proactive alerting before user impact",
+        "Automated incident response where possible",
+        "Comprehensive logging for troubleshooting"
+      ]
+    },
+    "components": {
+      "ecs_instance": {
+        "type": "c6.xlarge",
+        "specifications": "4 vCPUs, 8GB RAM, 100GB SSD",
+        "monitoring_agent": "Cloud Eye Agent (telescope)",
+        "metrics_collected": [
+          "CPU utilization",
+          "Memory utilization",
+          "Disk utilization",
+          "Network I/O",
+          "Process monitoring"
+        ]
+      },
+      "cloud_eye_dashboard": {
+        "name": "ARSL Production Monitor",
+        "panels": [
+          {
+            "name": "System Overview",
+            "metrics": [
+              "instance_status",
+              "uptime"
+            ]
+          },
+          {
+            "name": "Performance Metrics",
+            "metrics": [
+              "cpu_util",
+              "mem_util",
+              "disk_util"
+            ]
+          },
+          {
+            "name": "API Performance",
+            "metrics": [
+              "response_time",
+              "error_rate",
+              "request_count"
+            ]
+          },
+          {
+            "name": "Business Metrics",
+            "metrics": [
+              "prediction_accuracy",
+              "daily_users"
+            ]
+          },
+          {
+            "name": "Network Metrics",
+            "metrics": [
+              "bandwidth_in",
+              "bandwidth_out"
+            ]
+          },
+          {
+            "name": "Resource Trends",
+            "metrics": [
+              "historical_usage",
+              "capacity_planning"
+            ]
+          }
+        ],
+        "refresh_interval": "1 minute",
+        "data_retention": "30 days"
+      },
+      "alerting_system": {
+        "notification_topics": [
+          {
+            "name": "critical-alerts",
+            "endpoints": [
+              "SMS",
+              "Email"
+            ]
+          },
+          {
+            "name": "warning-alerts",
+            "endpoints": [
+              "Email"
+            ]
+          },
+          {
+            "name": "business-alerts",
+            "endpoints": [
+              "Email",
+              "Webhook"
+            ]
+          }
+        ],
+        "alert_rules": [
+          {
+            "name": "cpu-critical",
+            "threshold": "90%",
+            "duration": "5 minutes"
+          },
+          {
+            "name": "memory-critical",
+            "threshold": "90%",
+            "duration": "5 minutes"
+          },
+          {
+            "name": "disk-critical",
+            "threshold": "85%",
+            "duration": "10 minutes"
+          },
+          {
+            "name": "service-down",
+            "threshold": "0 processes",
+            "duration": "1 minute"
+          },
+          {
+            "name": "high-error-rate",
+            "threshold": "5%",
+            "duration": "10 minutes"
+          }
+        ]
+      }
+    },
+    "data_flow": {
+      "metrics_collection": "ECS Agent \u2192 Cloud Eye \u2192 Dashboard",
+      "alert_processing": "Cloud Eye \u2192 Alert Rules \u2192 SMN \u2192 Notifications",
+      "log_aggregation": "Application \u2192 Local Files \u2192 LTS (optional)",
+      "custom_metrics": "Application \u2192 API \u2192 Cloud Eye \u2192 Dashboard"
+    },
+    "security": {
+      "access_control": [
+        "IAM policies for Cloud Eye access",
+        "ECS instance security groups",
+        "API endpoint authentication"
+      ],
+      "data_protection": [
+        "Encrypted metrics transmission",
+        "Secure notification channels",
+        "Log data privacy compliance"
+      ]
+    }
+  }
+}

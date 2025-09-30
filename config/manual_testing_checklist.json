@@ -1,0 +1,46 @@
+{
+  "manual_testing_checklist": {
+    "pre_test_setup": [
+      "\u2610 Ensure ECS instance is running and accessible",
+      "\u2610 Verify Cloud Eye dashboard is configured",
+      "\u2610 Confirm all notification topics are set up",
+      "\u2610 Check alert rules are active",
+      "\u2610 Prepare test notification endpoints"
+    ],
+    "dashboard_testing": [
+      "\u2610 Open Cloud Eye dashboard: https://console.huaweicloud.com/ces",
+      "\u2610 Navigate to 'ARSL Production Monitor' dashboard",
+      "\u2610 Verify System Overview panel shows instance status",
+      "\u2610 Check Performance Metrics panel shows CPU/Memory/Disk",
+      "\u2610 Confirm API Performance panel displays request metrics",
+      "\u2610 Test dashboard refresh and time range selection",
+      "\u2610 Screenshot dashboard for documentation"
+    ],
+    "alert_testing": [
+      "\u2610 Navigate to Cloud Eye \u2192 Alarm Rules",
+      "\u2610 Verify all 9 alert rules are active and enabled",
+      "\u2610 Test critical alert: Stop nginx service",
+      "\u2610 Check SMS notification received within 2 minutes",
+      "\u2610 Verify email notification with correct formatting",
+      "\u2610 Test webhook delivery (if configured)",
+      "\u2610 Restart nginx and verify alert clears",
+      "\u2610 Test warning alert: Generate high CPU load",
+      "\u2610 Confirm warning notification received",
+      "\u2610 Document alert response times"
+    ],
+    "performance_validation": [
+      "\u2610 Run load test against API endpoints",
+      "\u2610 Monitor response time during load test",
+      "\u2610 Verify auto-scaling triggers (if configured)",
+      "\u2610 Check resource utilization remains within limits",
+      "\u2610 Test system recovery after load test"
+    ],
+    "documentation_tasks": [
+      "\u2610 Document all test results",
+      "\u2610 Record any issues or anomalies",
+      "\u2610 Update monitoring procedures if needed",
+      "\u2610 Create operational runbook",
+      "\u2610 Schedule regular monitoring health checks"
+    ]
+  }
+}

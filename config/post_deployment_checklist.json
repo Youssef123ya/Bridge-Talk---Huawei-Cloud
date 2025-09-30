@@ -1,0 +1,68 @@
+{
+  "immediate_checks": [
+    {
+      "check": "Instance Status",
+      "command": "Check ECS console - status should be 'Running'",
+      "expected": "Running status with green indicator"
+    },
+    {
+      "check": "SSH Connectivity",
+      "command": "ssh -i arsl-keypair.pem ubuntu@<instance-ip>",
+      "expected": "Successful SSH connection"
+    },
+    {
+      "check": "System Health",
+      "command": "curl http://<instance-ip>/health",
+      "expected": "Response: 'healthy'"
+    },
+    {
+      "check": "API Proxy",
+      "command": "curl http://<instance-ip>/api/v1/health",
+      "expected": "JSON response with API health status"
+    }
+  ],
+  "service_checks": [
+    {
+      "service": "Docker",
+      "command": "sudo systemctl status docker",
+      "expected": "active (running)"
+    },
+    {
+      "service": "Nginx",
+      "command": "sudo systemctl status nginx",
+      "expected": "active (running)"
+    },
+    {
+      "service": "ARSL Monitor",
+      "command": "sudo systemctl status arsl-monitor",
+      "expected": "active (running)"
+    },
+    {
+      "service": "Cloud Eye Agent",
+      "command": "sudo systemctl status ces-agent",
+      "expected": "active (running)"
+    }
+  ],
+  "performance_checks": [
+    {
+      "metric": "CPU Usage",
+      "command": "top -n1 | head -3",
+      "expected": "< 20% under normal load"
+    },
+    {
+      "metric": "Memory Usage",
+      "command": "free -h",
+      "expected": "< 50% memory used"
+    },
+    {
+      "metric": "Disk Space",
+      "command": "df -h",
+      "expected": "< 30% disk used"
+    },
+    {
+      "metric": "Network",
+      "command": "ping -c 3 google.com",
+      "expected": "< 50ms response time"
+    }
+  ]
+}

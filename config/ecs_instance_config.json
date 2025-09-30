@@ -1,0 +1,58 @@
+{
+  "instance_configuration": {
+    "basic_config": {
+      "name": "arsl-compute-node",
+      "region": "af-north-1",
+      "availability_zone": "af-north-1a",
+      "image": "Ubuntu 20.04 LTS (64-bit)",
+      "instance_type": "c6.xlarge",
+      "specifications": {
+        "cpu": "4 vCPUs",
+        "memory": "8GB RAM",
+        "network": "Up to 25 Gbps",
+        "storage": "EBS-optimized"
+      }
+    },
+    "storage_config": {
+      "system_disk": {
+        "type": "General Purpose SSD (gp3)",
+        "size": "40GB",
+        "iops": "3000",
+        "throughput": "125 MB/s"
+      },
+      "data_disk": {
+        "type": "General Purpose SSD (gp3)",
+        "size": "100GB",
+        "iops": "3000",
+        "throughput": "125 MB/s",
+        "mount_point": "/opt/arsl"
+      }
+    },
+    "network_config": {
+      "vpc": "Default VPC",
+      "subnet": "Default subnet",
+      "security_group": "arsl-security-group",
+      "public_ip": "Auto-assign Elastic IP",
+      "bandwidth": "5 Mbps"
+    },
+    "advanced_config": {
+      "key_pair": "arsl-keypair",
+      "user_data": "cloud-init script",
+      "monitoring": "Detailed monitoring enabled",
+      "termination_protection": false,
+      "tags": {
+        "Project": "ARSL",
+        "Environment": "Production",
+        "Service": "Monitoring",
+        "Owner": "yyacoup"
+      }
+    }
+  },
+  "estimated_costs": {
+    "instance": "$60/month",
+    "storage": "$15/month",
+    "bandwidth": "$10/month",
+    "monitoring": "$5/month",
+    "total": "$90/month"
+  }
+}
