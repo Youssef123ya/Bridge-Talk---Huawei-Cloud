@@ -20,6 +20,7 @@ This project now includes **full Huawei Cloud integration** for enterprise-scale
 - 🌐 **API Gateway** - Real-time inference deployment
 - 📊 **Cloud Eye** - Monitoring and alerting
 - ⚡ **ECS** - Scalable compute resources
+<img width="1225" height="910" alt="diagram" src="https://github.com/user-attachments/assets/f001b3ec-76ce-44d1-a7fa-1b88634deaa4" />
 
 ### 📋 **Quick Start with Cloud**
 ```bash
