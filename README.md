@@ -1,4 +1,4 @@
-Huawei Cloud - Arabic Sign Language Recognition Project
+Huawei Cloud - Bridge-Talk
 
 
 
